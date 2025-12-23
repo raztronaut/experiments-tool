@@ -12,10 +12,6 @@ const experiments = [
     description: "A WebGL shader experiment for landing pages.",
     href: "/experiments/shader-landing",
   },
-
-
-
-
 ];
 
 export default function Home() {

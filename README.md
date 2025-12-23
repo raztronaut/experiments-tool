@@ -24,12 +24,13 @@ Currently available experiments:
 We use a structured process to ensure experiments remain isolated and organized.
 
 ### 1. Scaffold a New Experiment
-Use the automation script to create a fresh, isolated environment (Route Group + Layout + Page).
+### 1. Scaffold a New Experiment
+Use the interactive automation script to create a fresh, isolated environment and component structure.
 ```bash
-npm run new:experiment <experiment-name>
-# Example: npm run new:experiment water-ripple
+npm run new:experiment
 ```
-*This command automatically adds the experiment to the homepage list.*
+Follow the prompts to name your experiment and provide a description.
+*This command automatically creates the route, component, stories, and adds the experiment to the homepage list.*
 
 ### 2. Develop Components
 Build your components in `src/components/experiments/<experiment-name>`.
