@@ -17,6 +17,8 @@ The project is organized to separate the main application dashboard from the iso
 
 ```
 experiments/
+├── public/
+│   └── experiments/          # Experiment assets (images, models)
 ├── src/
 │   ├── app/
 │   │   ├── (main)/           # Dashboard application routes
