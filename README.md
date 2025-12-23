@@ -1,36 +1,77 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Web Dev Experiments
+
+A personal playground for exploring UI interactions, shaders, and modern web development techniques.
+
+## Overview
+
+This project is a collection of **strictly isolated** experiments. Each experiment runs in its own environment with no shared global styles from the main application, ensuring a clean slate for every idea.
+
+**Tech Stack:**
+- **Framework**: Next.js 16 (App Router)
+- **Styling**: Tailwind CSS & Shadcn UI (Main App), Isolated CSS (Experiments)
+- **Animation**: Framer Motion
+- **3D**: React Three Fiber / Three.js
+
+## Experiments
+
+Currently available experiments:
+
+- **[Chat Send Button](/src/app/experiments/(chat-button)/chat-button/page.tsx)**: A morphological send button that transitions into a loading spinner.
+- **[Shader Landing Page](/src/app/experiments/(shader-landing)/shader-landing/page.tsx)**: A fullscreen WebGL gradient background using custom GLSL shaders.
+
+## Workflow: How to Build
+
+We use a structured process to ensure experiments remain isolated and organized.
+
+### 1. Scaffold a New Experiment
+Use the automation script to create a fresh, isolated environment (Route Group + Layout + Page).
+```bash
+npm run new:experiment <experiment-name>
+# Example: npm run new:experiment water-ripple
+```
+*This command automatically adds the experiment to the homepage list.*
+
+### 2. Develop Components
+Build your components in `src/components/experiments/<experiment-name>`.
+- Use **Storybook** to develop components in isolation before assembling them on the page.
+- Run `npm run storybook` to open the workbench.
+- Create stories in `src/components/experiments/<experiment-name>/*.stories.tsx`.
+
+### 3. Assemble the Page
+Import your finished components into `src/app/experiments/(<experiment-name>)/<experiment-name>/page.tsx`.
+- This page is your blank canvas.
+- No global styles from the main site will leak in here.
+- If you need specific styles, update `src/app/experiments/experiments.css` or use CSS modules.
+
+### 4. Verify
+Visit `http://localhost:3000/experiments/<experiment-name>` to see your creation live.
+
+### 5. Deleting an Experiment
+To safely remove an experiment (folder, components, and homepage entry):
+```bash
+npm run delete:experiment <experiment-name>
+# Example: npm run delete:experiment water-ripple
+```
 
 ## Getting Started
 
-First, run the development server:
+1. **Install dependencies**:
+   ```bash
+   npm install
+   ```
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+2. **Run the development server**:
+   ```bash
+   npm run dev
+   ```
+   Visit [http://localhost:3000](http://localhost:3000) for the main dashboard.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+3. **Run component workbench (Storybook)**:
+   ```bash
+   npm run storybook
+   ```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+4. **Run tests**:
+   ```bash
+   npm run test
+   ```
