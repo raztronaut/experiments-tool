@@ -1,4 +1,4 @@
-import { ChatSendButton } from "@/components/experiments/chat-send-button";
+import { ChatSendButton } from "@/components/experiments/chat-send-button/ChatSendButton";
 
 export default function ChatButtonPage() {
     return (

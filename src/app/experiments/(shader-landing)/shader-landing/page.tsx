@@ -1,4 +1,4 @@
-import { ShaderLanding } from "@/components/experiments/shader-landing";
+import { ShaderLanding } from "@/components/experiments/shader-landing/ShaderLanding";
 
 export default function ShaderLandingPage() {
     return (

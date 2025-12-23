@@ -2,7 +2,12 @@ import Link from "next/link";
 import { Card, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 
 const experiments = [
-  {
+    {
+    title: "Test",
+    description: "test description",
+    href: "/experiments/test",
+  },
+{
     title: "Chat Send Button",
     description: "A smooth, animated send button for chat interfaces.",
     href: "/experiments/chat-button",

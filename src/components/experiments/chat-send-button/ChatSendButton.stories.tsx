@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { ChatSendButton } from './chat-send-button';
+import { ChatSendButton } from './ChatSendButton';
 
 const meta = {
     title: 'Experiments/ChatSendButton',
