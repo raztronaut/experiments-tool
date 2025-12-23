@@ -2,6 +2,8 @@
 
 A personal playground for exploring UI interactions, shaders, and modern web development techniques.
 
+You can find my experiments [here](https://raziexperiments.vercel.app).
+
 ## Purpose
 
 The goal of this project is to provide a robust environment for rapid prototyping. It allows for the exploration of new ideas, libraries, and techniques without the overhead of setting up a new project every time, while ensuring that each experiment remains **strictly isolated** from others.
