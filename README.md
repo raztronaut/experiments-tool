@@ -91,6 +91,32 @@ This script removes all associated files (routes, components, public assets). Be
 - **No Global Store Pollution**: Avoid adding experiment-specific state to global stores unless absolutely necessary.
 - **Cleanups**: Use `useEffect` cleanups for event listeners, timers, or WebGL contexts to prevent memory leaks when navigating away.
 
+## AI-Assisted Development
+
+This project includes rules and workflows for AI coding assistants (like Antigravity, Cursor, GitHub Copilot Chat) that help maintain the isolation architecture automatically.
+
+### Available Workflows
+
+| Command | Purpose |
+|---------|---------|
+| `/new-experiment` | Scaffold a new experiment with all required files |
+| `/develop-experiment` | Work on an existing experiment with isolation guardrails |
+| `/cleanup-experiment` | Safely remove an experiment and all its files |
+| `/add-experiment-component` | Add a new component within an experiment |
+| `/add-experiment-assets` | Add images, 3D models, or other assets |
+
+### What the AI Knows
+
+The `.agent/` directory contains:
+- **Rules** that enforce isolation (no cross-experiment imports, correct file locations)
+- **Workflows** with code templates for common patterns (Framer Motion, React Three Fiber, etc.)
+
+This means AI assistants will automatically:
+- Use `npm run new:experiment` instead of manually creating files
+- Place components in the correct experiment directory
+- Follow cleanup patterns for `useEffect` hooks
+- Avoid modifying shared code for experiment-specific needs
+
 ## Getting Started
 
 1. **Install dependencies**:
