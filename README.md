@@ -2,57 +2,91 @@
 
 A personal playground for exploring UI interactions, shaders, and modern web development techniques.
 
-## Overview
+## Purpose
 
-This project is a collection of **strictly isolated** experiments. Each experiment runs in its own environment with no shared global styles from the main application, ensuring a clean slate for every idea.
+The goal of this project is to provide a robust environment for rapid prototyping. It allows for the exploration of new ideas, libraries, and techniques without the overhead of setting up a new project every time, while ensuring that each experiment remains **strictly isolated** from others.
 
-**Tech Stack:**
+## Prerequisites
+
+- **Node.js**: v20 or higher
+- **npm**: v10 or higher
+
+## Project Structure
+
+The project is organized to separate the main application dashboard from the isolated experiments.
+
+```
+experiments/
+├── src/
+│   ├── app/
+│   │   ├── (main)/           # Dashboard application routes
+│   │   └── experiments/      # Isolated experiment routes
+│   │       └── (group)/      # Route groups (opt-out of main layout)
+│   ├── components/
+│   │   ├── ui/               # Shared dashboard components (Shadcn)
+│   │   └── experiments/      # Experiment-specific components
+│   └── lib/                  # Shared utilities
+├── scripts/                  # Automation scripts (cleanup, etc.)
+└── plopfile.js               # Scaffolding generator
+```
+
+## Architecture
+
+To ensure that experiments do not interfere with each other or the main application layout:
+
+- **Isolated Environments**: Each experiment runs in its own route group.
+- **Style Isolation**: The main application uses global styles (Tailwind, Shadcn), but experiments can opt-out or use their own isolated CSS to ensure a clean slate.
+- **Component Independence**: Components are built specifically for their experiment, often developed in isolation using Storybook before integration.
+
+## Technology Stack
+
 - **Framework**: Next.js 16 (App Router)
-- **Styling**: Tailwind CSS & Shadcn UI (Main App), Isolated CSS (Experiments)
+- **Styling**: Tailwind CSS & Shadcn UI (Main Dashboard)
 - **Animation**: Framer Motion
-- **3D**: React Three Fiber / Three.js
+- **3D Graphics**: React Three Fiber / Three.js
+- **Tooling**: Plop.js for scaffolding, Vitest for testing, Storybook for component development.
 
-## Experiments
+## Workflow & Automation
 
-Currently available experiments:
+We use custom automation to streamline the creative process and maintain project cleanliness.
 
-- **[Chat Send Button](/src/app/experiments/(chat-button)/chat-button/page.tsx)**: A morphological send button that transitions into a loading spinner.
-- **[Shader Landing Page](/src/app/experiments/(shader-landing)/shader-landing/page.tsx)**: A fullscreen WebGL gradient background using custom GLSL shaders.
-
-## Workflow: How to Build
-
-We use a structured process to ensure experiments remain isolated and organized.
-
-### 1. Scaffold a New Experiment
-### 1. Scaffold a New Experiment
-Use the interactive automation script to create a fresh, isolated environment and component structure.
+### 1. Scaffold a New Experiment (`plop.js`)
+Instead of manually creating folders and files, we use a CLI generator to scaffold new experiments.
 ```bash
 npm run new:experiment
 ```
-Follow the prompts to name your experiment and provide a description.
-*This command automatically creates the route, component, stories, and adds the experiment to the homepage list.*
+This command:
+- Prompts for an experiment name and description.
+- Generates the route structure in `src/app/experiments`.
+- Creates a dedicated component directory in `src/components/experiments`.
+- Sets up initial Storybook stories.
+- Automatically registers the experiment in the main dashboard list.
 
-### 2. Develop Components
-Build your components in `src/components/experiments/<experiment-name>`.
-- Use **Storybook** to develop components in isolation before assembling them on the page.
-- Run `npm run storybook` to open the workbench.
-- Create stories in `src/components/experiments/<experiment-name>/*.stories.tsx`.
+### 2. Develop Components (Storybook)
+Complex interactions are best built in isolation.
+```bash
+npm run storybook
+```
+We use Storybook to build and refine components without the noise of the full application context.
 
-### 3. Assemble the Page
-Import your finished components into `src/app/experiments/(<experiment-name>)/<experiment-name>/page.tsx`.
-- This page is your blank canvas.
-- No global styles from the main site will leak in here.
-- If you need specific styles, update `src/app/experiments/experiments.css` or use CSS modules.
+### 3. Integration
+Once components are ready, they are assembled into the page file designated for that experiment.
 
-### 4. Verify
+### 4. Verification
 Visit `http://localhost:3000/experiments/<experiment-name>` to see your creation live.
 
-### 5. Deleting an Experiment
-To safely remove an experiment (folder, components, and homepage entry):
+### 5. Cleanup
+Experiments can be transient. If an idea doesn't work out or is no longer needed, it can be cleanly removed.
 ```bash
 npm run delete:experiment <experiment-name>
-# Example: npm run delete:experiment water-ripple
 ```
+This script removes all associated files (routes, components, utilities) and deregisters the experiment from the main list.
+
+## Best Practices
+
+- **Strict Isolation**: Do not import components from other experiments. Keep dependencies self-contained.
+- **No Global Store Pollution**: Avoid adding experiment-specific state to global stores unless absolutely necessary.
+- **Cleanups**: Use `useEffect` cleanups for event listeners, timers, or WebGL contexts to prevent memory leaks when navigating away.
 
 ## Getting Started
 
@@ -76,3 +110,7 @@ npm run delete:experiment <experiment-name>
    ```bash
    npm run test
    ```
+
+## License
+
+MIT
