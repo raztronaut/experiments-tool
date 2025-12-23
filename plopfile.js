@@ -39,34 +39,40 @@ module.exports = function (plop) {
                     path: 'src/app/experiments/({{dashCase name}})/{{dashCase name}}/error.tsx',
                     templateFile: 'plop-templates/experiment/route-error.tsx.hbs',
                 },
-                // 4. Create Main Component
+                // 4. Create Metadata File
+                {
+                    type: 'add',
+                    path: 'src/app/experiments/({{dashCase name}})/experiment.json',
+                    template: JSON.stringify({
+                        title: '{{titleCase name}}',
+                        description: '{{description}}',
+                        slug: '{{dashCase name}}',
+                        created: new Date().toISOString(),
+                    }, null, 2),
+                },
+                // 5. Create Public Assets Folder
+                {
+                    type: 'add',
+                    path: 'public/experiments/{{dashCase name}}/.gitkeep',
+                    template: '',
+                },
+                // 6. Create Main Component
                 {
                     type: 'add',
                     path: 'src/components/experiments/{{dashCase name}}/{{pascalCase name}}.tsx',
                     templateFile: 'plop-templates/experiment/component.tsx.hbs',
                 },
-                // 5. Create Component Story
+                // 7. Create Component Story
                 {
                     type: 'add',
                     path: 'src/components/experiments/{{dashCase name}}/{{pascalCase name}}.stories.tsx',
                     templateFile: 'plop-templates/experiment/component.stories.tsx.hbs',
                 },
-                // 6. Create Component Test
+                // 8. Create Component Test
                 {
                     type: 'add',
                     path: 'src/components/experiments/{{dashCase name}}/{{pascalCase name}}.test.tsx',
                     templateFile: 'plop-templates/experiment/component.test.tsx.hbs',
-                },
-                // 7. Register in Homepage
-                {
-                    type: 'modify',
-                    path: 'src/app/(main)/page.tsx',
-                    pattern: /(const experiments = \[\s*)/,
-                    template: `$1  {
-    title: "{{titleCase name}}",
-    description: "{{description}}",
-    href: "/experiments/{{dashCase name}}",
-  },\n`,
                 }
             ];
 

@@ -11,7 +11,7 @@
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
     "new:experiment": "plop experiment",
-    "delete:experiment": "node scripts/delete-experiment.js",
+    "delete:experiment": "node scripts/delete-experiment.mjs",
     "prepare": "husky"
   },
   "dependencies": {
