@@ -59,8 +59,9 @@ This command:
 - Prompts for an experiment name and description.
 - Generates the route structure in `src/app/experiments`.
 - Creates a dedicated component directory in `src/components/experiments`.
+- **Creates a metadata file (`experiment.json`)** which allows the dashboard to automatically list the experiment.
+- **Creates an asset directory** in `public/experiments/<name>` for images/models.
 - Sets up initial Storybook stories.
-- Automatically registers the experiment in the main dashboard list.
 
 ### 2. Develop Components (Storybook)
 Complex interactions are best built in isolation.
@@ -80,7 +81,7 @@ Experiments can be transient. If an idea doesn't work out or is no longer needed
 ```bash
 npm run delete:experiment <experiment-name>
 ```
-This script removes all associated files (routes, components, utilities) and deregisters the experiment from the main list.
+This script removes all associated files (routes, components, public assets). Because the registry is dynamic, the experiment automatically disappears from the dashboard.
 
 ## Best Practices
 
