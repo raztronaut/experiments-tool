@@ -12,7 +12,7 @@
     "build-storybook": "storybook build",
     "new:experiment": "plop experiment",
     "delete:experiment": "node scripts/delete-experiment.mjs",
-    "prepare": "husky"
+    "prepare": "husky || true"
   },
   "dependencies": {
     "@radix-ui/react-scroll-area": "^1.2.10",
