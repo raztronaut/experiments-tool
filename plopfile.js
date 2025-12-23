@@ -19,7 +19,7 @@ module.exports = function (plop) {
                 message: 'Short description (optional):',
             },
         ],
-        actions: function (data) {
+        actions: function () {
             const actions = [
                 // 1. Create Route Group Layout (Isolated Environment)
                 {

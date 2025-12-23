@@ -9,7 +9,6 @@ export function ChatSendButton() {
     const [inputValue, setInputValue] = React.useState("");
     const [isHovered, setIsHovered] = React.useState(false);
     const [isSending, setIsSending] = React.useState(false);
-    const fileInputRef = React.useRef<HTMLInputElement>(null);
 
     const handleSend = async () => {
         if (!inputValue.trim()) return;
