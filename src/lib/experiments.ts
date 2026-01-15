@@ -41,7 +41,7 @@ export async function getExperiments(): Promise<Experiment[]> {
         // Filter out nulls and sort by date descending (newest first)
         return experiments
             .filter((exp): exp is Experiment => exp !== null)
-            .sort((a, b) => new Date(b.created).getTime() - new Date(a.created).getTime());
+            .sort((a, b) => b.created.localeCompare(a.created));
 
     } catch (error) {
         console.error("Error reading experiments directory:", error);
