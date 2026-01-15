@@ -1,4 +1,11 @@
-import { ChatSendButton } from "@/components/experiments/chat-send-button/ChatSendButton";
+"use client";
+
+import dynamic from "next/dynamic";
+
+const ChatSendButton = dynamic(() => import("@/components/experiments/chat-send-button/ChatSendButton").then(mod => mod.ChatSendButton), {
+    ssr: false,
+    loading: () => <div className="w-8 h-8 rounded-lg bg-zinc-800 animate-pulse" />
+});
 
 export default function ChatButtonPage() {
     return (

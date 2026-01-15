@@ -1,25 +1,16 @@
-import type { Metadata } from "next";
-import { Inter } from "next/font/google";
-import "./globals.css";
-import { cn } from "@/lib/utils";
+import { SiteFooter } from "@/components/site-footer";
 
-const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
-
-export const metadata: Metadata = {
-  title: "Experiments",
-  description: "Web development experiments and UI playground.",
-};
-
-export default function RootLayout({
+export default function Layout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="dark">
-      <body className={cn(inter.className, "min-h-screen bg-background font-sans antialiased text-foreground")}>
-        {children}
-      </body>
-    </html>
+    <div className="flex min-h-screen flex-col">
+      <div className="flex-1">{children}</div>
+      <div className="w-full max-w-4xl mx-auto px-8 md:px-24">
+        <SiteFooter />
+      </div>
+    </div>
   );
 }

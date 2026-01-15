@@ -1,7 +1,7 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { getExperiments } from './experiments';
 import fs from 'fs/promises';
-import path from 'path';
+import { Dirent } from 'fs';
 
 // Mock fs/promises
 vi.mock('fs/promises', () => ({
@@ -11,14 +11,19 @@ vi.mock('fs/promises', () => ({
     }
 }));
 
+// Create a type that matches the minimal interface of Dirent we need
+interface MockDirent {
+    name: string;
+    isDirectory: () => boolean;
+}
+
 describe('getExperiments', () => {
     beforeEach(() => {
         vi.resetAllMocks();
     });
 
     it('should sort experiments by date descending', async () => {
-        const mockExperimentsDir = '/mock/experiments';
-        const mockDirs = [
+        const mockDirs: MockDirent[] = [
             { name: '(exp1)', isDirectory: () => true },
             { name: '(exp2)', isDirectory: () => true },
             { name: '(exp3)', isDirectory: () => true },
@@ -27,25 +32,26 @@ describe('getExperiments', () => {
         ];
 
         // Mock readdir to return directories
-        (fs.readdir as any).mockResolvedValue(mockDirs);
+        vi.mocked(fs.readdir).mockResolvedValue(mockDirs as unknown as Dirent[]);
 
         // Mock readFile to return config for each experiment
-        (fs.readFile as any).mockImplementation(async (filePath: string) => {
-            if (filePath.includes('(exp1)')) {
+        vi.mocked(fs.readFile).mockImplementation(async (filePath) => {
+            const pathStr = String(filePath);
+            if (pathStr.includes('(exp1)')) {
                 return JSON.stringify({
                     title: 'Exp 1',
                     slug: 'exp1',
                     created: '2023-01-01T00:00:00.000Z'
                 });
             }
-            if (filePath.includes('(exp2)')) {
+            if (pathStr.includes('(exp2)')) {
                 return JSON.stringify({
                     title: 'Exp 2',
                     slug: 'exp2',
                     created: '2023-01-02T00:00:00.000Z' // Newest
                 });
             }
-            if (filePath.includes('(exp3)')) {
+            if (pathStr.includes('(exp3)')) {
                 return JSON.stringify({
                     title: 'Exp 3',
                     slug: 'exp3',
@@ -64,12 +70,12 @@ describe('getExperiments', () => {
     });
 
     it('should handle missing config files gracefully', async () => {
-         const mockDirs = [
+        const mockDirs: MockDirent[] = [
             { name: '(exp1)', isDirectory: () => true },
         ];
 
-        (fs.readdir as any).mockResolvedValue(mockDirs);
-        (fs.readFile as any).mockRejectedValue(new Error('File not found'));
+        vi.mocked(fs.readdir).mockResolvedValue(mockDirs as unknown as Dirent[]);
+        vi.mocked(fs.readFile).mockRejectedValue(new Error('File not found'));
 
         const experiments = await getExperiments();
         expect(experiments).toHaveLength(0);

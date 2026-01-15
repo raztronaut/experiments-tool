@@ -13,7 +13,7 @@ export function ChatSendButton() {
     const handleSend = async () => {
         if (!inputValue.trim()) return;
         setIsSending(true);
-        // Simulate sending
+        // Mock network request delay
         await new Promise((resolve) => setTimeout(resolve, 1500));
         setIsSending(false);
         setInputValue("");
@@ -76,9 +76,9 @@ export function ChatSendButton() {
                         </AnimatePresence>
 
                         {/* Glow effect on hover when active */}
-                        {inputValue.trim() && !isSending && (
+                        {inputValue.trim() && !isSending ? (
                             <div className="absolute inset-0 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-white/20 blur-md -z-10" />
-                        )}
+                        ) : null}
                     </motion.button>
                 </div>
             </div>

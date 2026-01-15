@@ -15,11 +15,11 @@ export function ExperimentList({ experiments }: ExperimentListProps) {
                         <CardHeader>
                             <div className="flex justify-between items-start">
                                 <CardTitle className="text-lg">{experiment.title}</CardTitle>
-                                {experiment.created && (
+                                {experiment.created ? (
                                     <span className="text-xs text-muted-foreground tabular-nums">
                                         {new Date(experiment.created).toLocaleDateString()}
                                     </span>
-                                )}
+                                ) : null}
                             </div>
                             <CardDescription>{experiment.description}</CardDescription>
                         </CardHeader>
@@ -27,11 +27,11 @@ export function ExperimentList({ experiments }: ExperimentListProps) {
                 </Link>
             ))}
 
-            {experiments.length === 0 && (
+            {experiments.length === 0 ? (
                 <div className="p-8 text-center text-muted-foreground border border-dashed rounded-lg">
                     No experiments found. Run <code className="bg-muted px-1 py-0.5 rounded">npm run new:experiment</code> to create one.
                 </div>
-            )}
+            ) : null}
         </div>
     );
 }
