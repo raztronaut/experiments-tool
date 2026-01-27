@@ -2,7 +2,7 @@
 
 A personal playground for exploring UI interactions, shaders, and modern web development techniques.
 
-You can find my experiments [here](https://raziexperiments.vercel.app).
+You can find my experiments [here](https://razisyed.cv).
 
 ## Purpose
 
